@@ -2,319 +2,491 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Excela — Home</title>
-<script src="./vendor/react.js"></script>
-<script src="./vendor/react-dom.js"></script>
-<script src="./support.js"></script>
-</head>
-<body>
-<x-dc>
-<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Excela | Workday Financials Implementation</title>
+<meta name="description" content="Excela designs, deploys and optimizes Workday Financial Management for finance teams that need to close faster and report with confidence.">
+<link rel="icon" type="image/png" href="./assets/627297ca576d4280c6763a8819faa956.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
 <style>
-body{margin:0;background:#07061A}
-a{color:#B6A6FF}a:hover{color:#DCD3FF}
-</style>
-</helmet>
-<div style="width: 1440px; height: 6100px; box-sizing: border-box; background: #07061A; color: #ECEAF7; font-family: 'IBM Plex Sans', 'Helvetica Neue', sans-serif; display: flex; flex-direction: column; overflow: hidden">
+:root {
+  --accent: #5B3DF5;
+  --bg: #07061A;
+  --bg-alt: #0B0A21;
+  --card: #0D0B24;
+  --line: #1C1940;
+  --line-2: #221E4C;
+  --text: #ECEAF7;
+  --heading: #F3F1FC;
+  --muted: #B3AFD3;
+  --muted-2: #ADA9CE;
+  --label: #8F89C2;
+  --eyebrow: #A99BFF;
+  --gutter: 120px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; }
+a { color: #B6A6FF; }
+a:hover { color: #DCD3FF; }
+h1, h2, h3 { margin: 0; font-family: 'Sora', 'Helvetica Neue', sans-serif; font-weight: 600; color: var(--heading); }
+p { margin: 0; }
 
-<!-- NAV -->
-<header style="height: 88px; box-sizing: border-box; padding: 0 120px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #1C1940; flex-shrink: 0">
-<a href="#top" aria-label="Excela home" style="display: flex; align-items: center"><img src="./assets/f334857f25ae0449d4b251165bbc5e58.png" alt="Excela" style="height: 40px; width: auto; display: block"></a>
-<nav style="display: flex; align-items: center; gap: 36px; font-size: 15px">
-<a href="#services" style="color: #C9C5E6; text-decoration: none">Services</a>
-<a href="#modules" style="color: #C9C5E6; text-decoration: none">Workday Financials</a>
-<a href="#approach" style="color: #C9C5E6; text-decoration: none">Approach</a>
-<a href="#industries" style="color: #C9C5E6; text-decoration: none">Industries</a>
-<a href="#about" style="color: #C9C5E6; text-decoration: none">About</a>
-</nav>
-<a href="#contact" style="height: 44px; padding: 0 22px; display: flex; align-items: center; border-radius: 8px; background: {{accent}}; color: #FFFFFF; font-weight: 600; font-size: 15px; text-decoration: none">Book a consultation</a>
+.wrap { max-width: 1440px; margin: 0 auto; padding: 0 var(--gutter); }
+.eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--eyebrow); }
+.h2 { font-size: 44px; line-height: 1.12; letter-spacing: -0.015em; }
+.lead { font-size: 17px; line-height: 1.6; color: var(--muted); }
+.stack { display: flex; flex-direction: column; gap: 16px; }
+.btn { height: 52px; padding: 0 28px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; font-weight: 600; font-size: 16px; text-decoration: none; font-family: inherit; }
+.btn-primary { background: var(--accent); color: #fff; border: 0; cursor: pointer; }
+.btn-primary:hover { color: #fff; background: #6B50FF; }
+.btn-ghost { border: 1px solid #3A3570; color: var(--text); font-weight: 500; }
+.btn-ghost:hover { color: #fff; border-color: #5A539A; }
+section[id] { scroll-margin-top: 24px; }
+
+/* Header */
+.site-header { border-bottom: 1px solid var(--line); }
+.site-header .wrap { height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.site-header .logo img { height: 40px; width: auto; display: block; }
+.site-nav { display: flex; align-items: center; gap: 36px; font-size: 15px; }
+.site-nav a, .footer-col a { color: #C9C5E6; text-decoration: none; }
+.site-nav a:hover, .footer-col a:hover { color: #fff; }
+.site-header .btn { height: 44px; padding: 0 22px; font-size: 15px; }
+
+/* Hero */
+.hero { position: relative; overflow: hidden; }
+.hero-lines { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero .wrap { position: relative; min-height: 760px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; align-items: center; }
+.hero-copy { display: flex; flex-direction: column; gap: 28px; }
+.hero h1 { font-size: 64px; line-height: 1.05; letter-spacing: -0.02em; }
+.hero-copy p { font-size: 19px; line-height: 1.6; color: var(--muted); max-width: 540px; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; }
+.hero-art { position: relative; height: 560px; display: flex; align-items: center; justify-content: center; }
+.hero-art img { width: 470px; height: auto; display: block; }
+.path-card { position: absolute; left: 12px; bottom: 6px; width: 300px; padding: 18px 20px; border-radius: 12px; background: #0F0D2A; border: 1px solid #2A2560; display: flex; flex-direction: column; gap: 12px; }
+.path-card .label { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--label); }
+.path-card ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 14px; color: #DAD7F0; }
+.path-card li { display: flex; align-items: center; gap: 10px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+/* Clients */
+.clients { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.clients .wrap { padding-top: 40px; padding-bottom: 40px; display: flex; flex-direction: column; gap: 20px; }
+.clients .label { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--label); text-align: center; }
+.client-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px 24px; }
+.client-grid li { height: 64px; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 500; color: #A29DC8; text-align: center; }
+
+/* Services */
+.services .wrap { padding-top: 120px; display: flex; flex-direction: column; gap: 56px; }
+.section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 48px; }
+.section-head .stack { max-width: 640px; }
+.section-head .lead { max-width: 420px; }
+.card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.card { padding: 32px; border-radius: 14px; background: var(--card); border: 1px solid var(--line-2); display: flex; flex-direction: column; gap: 16px; }
+.card h3 { font-size: 21px; }
+.card p { font-size: 16px; line-height: 1.6; color: var(--muted-2); }
+
+/* Modules */
+.modules { margin-top: 120px; background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.modules .wrap { padding-top: 96px; padding-bottom: 96px; display: grid; grid-template-columns: 4fr 8fr; gap: 40px; }
+.modules .intro { display: flex; flex-direction: column; gap: 18px; }
+.modules h2 { font-size: 40px; line-height: 1.14; letter-spacing: -0.015em; }
+.module-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; font-size: 17px; }
+.module-list li { padding: 20px 0; border-bottom: 1px solid var(--line-2); display: flex; justify-content: space-between; gap: 16px; }
+.module-list .name { color: var(--text); font-weight: 500; }
+.module-list .code { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--label); white-space: nowrap; }
+
+/* Approach */
+.approach .wrap { padding-top: 120px; display: flex; flex-direction: column; gap: 56px; }
+.approach .stack { max-width: 720px; }
+.steps { position: relative; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px; }
+.steps::before { content: ''; position: absolute; left: 0; right: 0; top: 23px; height: 2px; background: linear-gradient(90deg, #8B5CF6, #3B7BFF); }
+.steps li { position: relative; display: flex; flex-direction: column; gap: 16px; }
+.step-num { width: 48px; height: 48px; border-radius: 50%; background: var(--bg); border: 2px solid; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #DCD3FF; }
+.steps h3 { font-size: 20px; }
+.steps p { font-size: 15px; line-height: 1.6; color: var(--muted-2); }
+
+/* About */
+.about .wrap { padding-top: 140px; display: grid; grid-template-columns: 5fr 7fr; gap: 40px; }
+.about .intro { display: flex; flex-direction: column; gap: 18px; }
+.about .intro a { margin-top: 8px; font-weight: 600; font-size: 16px; }
+.reasons { display: flex; flex-direction: column; }
+.reason { padding: 28px 0; border-top: 1px solid var(--line-2); display: grid; grid-template-columns: 1fr 2fr; gap: 24px; }
+.reason:last-child { border-bottom: 1px solid var(--line-2); }
+.reason h3 { font-size: 20px; }
+.reason p { font-size: 16px; line-height: 1.6; color: var(--muted-2); }
+
+/* Industries */
+.industries .wrap { padding-top: 140px; display: flex; flex-direction: column; gap: 48px; }
+.industries .stack { max-width: 720px; }
+.industry { padding: 28px 32px; border-radius: 14px; border: 1px solid var(--line-2); display: flex; flex-direction: column; gap: 10px; }
+.industry h3 { font-size: 20px; }
+.industry p { font-size: 15px; line-height: 1.6; color: var(--muted-2); }
+
+/* Contact */
+.contact-outer { padding-top: 140px; }
+.contact { padding: 64px; border-radius: 20px; background: #0E0C2A; border: 1px solid #2A2560; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px; }
+.contact .intro { display: flex; flex-direction: column; gap: 20px; }
+.contact-form { display: flex; flex-direction: column; gap: 18px; }
+.field-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.field { display: flex; flex-direction: column; gap: 8px; }
+.field label { font-size: 14px; color: #C9C5E6; }
+.field input, .field select, .field textarea { width: 100%; padding: 0 14px; border-radius: 8px; background: var(--bg); border: 1px solid #332E66; color: var(--text); font-size: 16px; font-family: inherit; }
+.field input, .field select { height: 48px; }
+.field textarea { padding: 12px 14px; resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+.field option { background: var(--bg); color: var(--text); }
+.contact-form .btn { width: 100%; }
+
+/* Footer */
+.site-footer { margin-top: 120px; border-top: 1px solid var(--line); }
+.site-footer .wrap { padding-top: 64px; padding-bottom: 48px; display: flex; flex-direction: column; gap: 48px; }
+.footer-grid { display: grid; grid-template-columns: 5fr 2fr 2fr 3fr; gap: 40px; }
+.footer-brand { display: flex; flex-direction: column; gap: 18px; }
+.footer-brand img { height: 36px; width: auto; align-self: flex-start; }
+.footer-brand p { font-size: 15px; line-height: 1.6; color: var(--muted-2); max-width: 360px; }
+.footer-col { display: flex; flex-direction: column; gap: 12px; font-size: 15px; }
+.footer-col .label { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--label); margin-bottom: 4px; }
+.footer-bottom { padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--label); }
+
+/* Responsive */
+@media (max-width: 1200px) {
+  :root { --gutter: 48px; }
+  .hero h1 { font-size: 52px; }
+  .client-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 960px) {
+  :root { --gutter: 32px; }
+  .site-nav { display: none; }
+  .hero .wrap { grid-template-columns: 1fr; min-height: 0; padding-top: 72px; padding-bottom: 72px; }
+  .hero-lines { display: none; }
+  .hero-art { height: auto; flex-direction: column; gap: 24px; }
+  .hero-art img { width: min(400px, 100%); }
+  .path-card { position: static; }
+  .h2 { font-size: 36px; }
+  .modules h2 { font-size: 34px; }
+  .section-head { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .modules .wrap, .about .wrap, .contact { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; gap: 32px; }
+  .steps::before { left: 23px; right: auto; top: 0; bottom: 0; width: 2px; height: auto; background: linear-gradient(180deg, #8B5CF6, #3B7BFF); }
+  .steps li { padding-left: 72px; }
+  .step-num { position: absolute; left: 0; top: 0; }
+  .contact { padding: 40px; gap: 40px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-brand { grid-column: 1 / -1; }
+  .services .wrap, .approach .wrap { padding-top: 96px; }
+  .about .wrap, .industries .wrap, .contact-outer { padding-top: 96px; }
+  .modules { margin-top: 96px; }
+  .modules .wrap { padding-top: 72px; padding-bottom: 72px; }
+  .site-footer { margin-top: 96px; }
+}
+@media (max-width: 640px) {
+  :root { --gutter: 16px; }
+  .site-header .wrap { height: 72px; }
+  .site-header .logo img { height: 30px; }
+  .site-header .btn { height: 40px; padding: 0 14px; font-size: 14px; }
+  .hero h1 { font-size: 38px; }
+  .hero-copy p { font-size: 17px; }
+  .h2, .modules h2 { font-size: 30px; }
+  .client-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .client-grid li { height: 48px; font-size: 16px; }
+  .card-grid, .module-list, .field-row, .footer-grid { grid-template-columns: 1fr; }
+  .reason { grid-template-columns: 1fr; gap: 8px; }
+  .contact { padding: 28px 20px; border-radius: 16px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="#top" class="logo" aria-label="Excela home"><img src="./assets/f334857f25ae0449d4b251165bbc5e58.png" alt="Excela" width="210" height="40"></a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#modules">Workday Financials</a>
+      <a href="#approach">Approach</a>
+      <a href="#industries">Industries</a>
+      <a href="#about">About</a>
+    </nav>
+    <a href="#contact" class="btn btn-primary">Book a consultation</a>
+  </div>
 </header>
 
-<!-- HERO -->
-<section id="top" style="position: relative; height: 760px; box-sizing: border-box; padding: 0 120px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; align-items: center; flex-shrink: 0">
-<svg aria-hidden="true" width="1440" height="760" viewBox="0 0 1440 760" style="position: absolute; left: 0; top: 0; pointer-events: none">
-<g fill="none" stroke-width="1.2">
-<path d="M0 120 H80 L120 160 H260" stroke="#3A2A8A"></path>
-<path d="M0 200 H40 L90 250 H200 L230 280 H330" stroke="#2E2472"></path>
-<path d="M0 300 H140 L180 340 H240" stroke="#3A2A8A"></path>
-<path d="M1440 520 H1340 L1300 560 H1180" stroke="#1F3A8F"></path>
-<path d="M1440 600 H1380 L1340 640 H1220 L1190 670 H1100" stroke="#1B2F75"></path>
-<path d="M1440 690 H1300 L1270 720 H1160" stroke="#1F3A8F"></path>
-</g>
-<g>
-<circle cx="260" cy="160" r="3.5" fill="#A06BFF"></circle>
-<circle cx="330" cy="280" r="3.5" fill="#8B5CF6"></circle>
-<circle cx="240" cy="340" r="3.5" fill="#A06BFF"></circle>
-<circle cx="1180" cy="560" r="3.5" fill="#4F7DFF"></circle>
-<circle cx="1100" cy="670" r="3.5" fill="#3B6CFF"></circle>
-<circle cx="1160" cy="720" r="3.5" fill="#4F7DFF"></circle>
-</g>
-</svg>
-<div style="position: relative; display: flex; flex-direction: column; gap: 28px">
-<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #A99BFF">Workday Financials implementation</div>
-<h1 style="margin: 0; font-family: 'Sora', 'Helvetica Neue', sans-serif; font-weight: 600; font-size: 64px; line-height: 1.05; letter-spacing: -0.02em; color: #F3F1FC">Finance on Workday, implemented right the first time.</h1>
-<p style="margin: 0; font-size: 19px; line-height: 1.6; color: #B3AFD3; max-width: 540px">Excela designs, deploys and optimizes Workday Financial Management for finance teams that need to close faster, report with confidence and grow without re-platforming.</p>
-<div style="display: flex; gap: 14px; margin-top: 8px">
-<a href="#contact" style="height: 52px; padding: 0 28px; display: flex; align-items: center; border-radius: 8px; background: {{accent}}; color: #FFFFFF; font-weight: 600; font-size: 16px; text-decoration: none">Plan your deployment</a>
-<a href="#services" style="height: 52px; padding: 0 28px; display: flex; align-items: center; border-radius: 8px; border: 1px solid #3A3570; color: #ECEAF7; font-weight: 500; font-size: 16px; text-decoration: none">Explore services</a>
-</div>
-</div>
-<div style="position: relative; height: 560px; display: flex; flex-direction: column; align-items: center; justify-content: center">
-<img src="./assets/627297ca576d4280c6763a8819faa956.png" alt="" style="width: 470px; height: auto; display: block">
-<div style="position: absolute; left: 12px; bottom: 6px; width: 300px; box-sizing: border-box; padding: 18px 20px; border-radius: 12px; background: #0F0D2A; border: 1px solid #2A2560; display: flex; flex-direction: column; gap: 12px">
-<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8F89C2">Delivery path</div>
-<div style="display: flex; flex-direction: column; gap: 9px; font-size: 14px; color: #DAD7F0">
-<div style="display: flex; align-items: center; gap: 10px"><span style="width: 8px; height: 8px; border-radius: 50%; background: #A06BFF"></span>Plan</div>
-<div style="display: flex; align-items: center; gap: 10px"><span style="width: 8px; height: 8px; border-radius: 50%; background: #8B5CF6"></span>Architect</div>
-<div style="display: flex; align-items: center; gap: 10px"><span style="width: 8px; height: 8px; border-radius: 50%; background: #6D5BFA"></span>Configure &amp; prototype</div>
-<div style="display: flex; align-items: center; gap: 10px"><span style="width: 8px; height: 8px; border-radius: 50%; background: #5068FF"></span>Test</div>
-<div style="display: flex; align-items: center; gap: 10px"><span style="width: 8px; height: 8px; border-radius: 50%; background: #3B7BFF"></span>Deploy &amp; hypercare</div>
-</div>
-</div>
-</div>
+<main>
+
+<section id="top" class="hero">
+  <svg class="hero-lines" aria-hidden="true" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice">
+    <g fill="none" stroke-width="1.2">
+      <path d="M0 120 H80 L120 160 H260" stroke="#3A2A8A"/>
+      <path d="M0 200 H40 L90 250 H200 L230 280 H330" stroke="#2E2472"/>
+      <path d="M0 300 H140 L180 340 H240" stroke="#3A2A8A"/>
+      <path d="M1440 520 H1340 L1300 560 H1180" stroke="#1F3A8F"/>
+      <path d="M1440 600 H1380 L1340 640 H1220 L1190 670 H1100" stroke="#1B2F75"/>
+      <path d="M1440 690 H1300 L1270 720 H1160" stroke="#1F3A8F"/>
+    </g>
+    <g>
+      <circle cx="260" cy="160" r="3.5" fill="#A06BFF"/>
+      <circle cx="330" cy="280" r="3.5" fill="#8B5CF6"/>
+      <circle cx="240" cy="340" r="3.5" fill="#A06BFF"/>
+      <circle cx="1180" cy="560" r="3.5" fill="#4F7DFF"/>
+      <circle cx="1100" cy="670" r="3.5" fill="#3B6CFF"/>
+      <circle cx="1160" cy="720" r="3.5" fill="#4F7DFF"/>
+    </g>
+  </svg>
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="eyebrow">Workday Financials implementation</div>
+      <h1>Finance on Workday, implemented right the first time.</h1>
+      <p>Excela designs, deploys and optimizes Workday Financial Management for finance teams that need to close faster, report with confidence and grow without re-platforming.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Plan your deployment</a>
+        <a href="#services" class="btn btn-ghost">Explore services</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <img src="./assets/627297ca576d4280c6763a8819faa956.png" alt="" width="535" height="420">
+      <div class="path-card">
+        <div class="label">Delivery path</div>
+        <ul>
+          <li><span class="dot" style="background:#A06BFF"></span>Plan</li>
+          <li><span class="dot" style="background:#8B5CF6"></span>Architect</li>
+          <li><span class="dot" style="background:#6D5BFA"></span>Configure &amp; prototype</li>
+          <li><span class="dot" style="background:#5068FF"></span>Test</li>
+          <li><span class="dot" style="background:#3B7BFF"></span>Deploy &amp; hypercare</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- TRUST STRIP -->
-<section style="box-sizing: border-box; padding: 40px 120px; border-top: 1px solid #1C1940; border-bottom: 1px solid #1C1940; display: flex; flex-direction: column; gap: 20px; flex-shrink: 0">
-<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #8F89C2; text-align: center">Trusted by finance teams at</div>
-<div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px 24px">
-<div style="height: 64px; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 500; color: #A29DC8; text-align: center">IDEMIA</div>
-<div style="height: 64px; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 500; color: #A29DC8; text-align: center">Emeria</div>
-<div style="height: 64px; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 500; color: #A29DC8; text-align: center">Sowee</div>
-<div style="height: 64px; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 500; color: #A29DC8; text-align: center">La Sade</div>
-<div style="height: 64px; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 500; color: #A29DC8; text-align: center">Eiffage</div>
-<div style="height: 64px; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 500; color: #A29DC8; text-align: center">Just Eat</div>
-<div style="height: 64px; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 500; color: #A29DC8; text-align: center">Clarins</div>
-<div style="height: 64px; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 500; color: #A29DC8; text-align: center">McArthurGlen</div>
-<div style="height: 64px; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 500; color: #A29DC8; text-align: center">Nuffield Health</div>
-<div style="height: 64px; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 500; color: #A29DC8; text-align: center">CSM</div>
-<div style="height: 64px; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 500; color: #A29DC8; text-align: center">Planet</div>
-<div style="height: 64px; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 500; color: #A29DC8; text-align: center">Orbis Protect</div>
-</div>
+<section class="clients" aria-label="Clients">
+  <div class="wrap">
+    <div class="label">Trusted by finance teams at</div>
+    <ul class="client-grid">
+      <li>IDEMIA</li>
+      <li>Emeria</li>
+      <li>Sowee</li>
+      <li>La Sade</li>
+      <li>Eiffage</li>
+      <li>Just Eat</li>
+      <li>Clarins</li>
+      <li>McArthurGlen</li>
+      <li>Nuffield Health</li>
+      <li>CSM</li>
+      <li>Planet</li>
+      <li>Orbis Protect</li>
+    </ul>
+  </div>
 </section>
 
-<!-- SERVICES -->
-
-
-<!-- MODULES -->
-<section id="services" style="box-sizing: border-box; padding: 120px 120px 0; display: flex; flex-direction: column; gap: 56px; flex-shrink: 0">
-<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 48px">
-<div style="display: flex; flex-direction: column; gap: 16px; max-width: 640px">
-<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #A99BFF">01 / Services</div>
-<h2 style="margin: 0; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 44px; line-height: 1.12; letter-spacing: -0.015em; color: #F3F1FC">One partner from blueprint to steady state.</h2>
-</div>
-<p style="margin: 0; max-width: 420px; font-size: 17px; line-height: 1.6; color: #B3AFD3">Whether you are moving off a legacy ERP, adding modules or fixing a deployment that never delivered, we meet you where you are.</p>
-</div>
-<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px">
-<div style="padding: 32px; border-radius: 14px; background: #0D0B24; border: 1px solid #221E4C; display: flex; flex-direction: column; gap: 16px">
-<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A99BFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V6M16 20v-8M3 20h18"></path><path d="M14 4h6v6"></path><path d="M20 4l-8 8"></path></svg>
-<h3 style="margin: 0; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 21px; color: #F3F1FC">New implementations</h3>
-<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #ADA9CE">Full-cycle Workday Financials deployments: design workshops, configuration, testing and go-live, scoped to your chart of accounts and operating model.</p>
-</div>
-<div style="padding: 32px; border-radius: 14px; background: #0D0B24; border: 1px solid #221E4C; display: flex; flex-direction: column; gap: 16px">
-<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A99BFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"></path><circle cx="12" cy="12" r="3.5"></circle></svg>
-<h3 style="margin: 0; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 21px; color: #F3F1FC">Optimization &amp; Phase X</h3>
-<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #ADA9CE">Health checks, redesigns and new module rollouts for tenants already live, taking advantage of each Workday release instead of working around it.</p>
-</div>
-<div style="padding: 32px; border-radius: 14px; background: #0D0B24; border: 1px solid #221E4C; display: flex; flex-direction: column; gap: 16px">
-<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A99BFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"></ellipse><path d="M5 5.5v6c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-6"></path><path d="M5 11.5v6c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-6"></path></svg>
-<h3 style="margin: 0; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 21px; color: #F3F1FC">Data migration</h3>
-<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #ADA9CE">Conversion strategy, cleansing and reconciled loads of balances, open items, suppliers, customers and assets, with an audit trail your controllers can sign off.</p>
-</div>
-<div style="padding: 32px; border-radius: 14px; background: #0D0B24; border: 1px solid #221E4C; display: flex; flex-direction: column; gap: 16px">
-<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A99BFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h7M4 17h7"></path><circle cx="14" cy="7" r="2.5"></circle><circle cx="14" cy="17" r="2.5"></circle><path d="M16.5 7H20M16.5 17H20M20 7v10"></path></svg>
-<h3 style="margin: 0; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 21px; color: #F3F1FC">Integrations</h3>
-<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #ADA9CE">Banks, payroll, procurement and data platforms connected through EIB, Workday Studio, core connectors and APIs, built to be monitored and maintained.</p>
-</div>
-<div style="padding: 32px; border-radius: 14px; background: #0D0B24; border: 1px solid #221E4C; display: flex; flex-direction: column; gap: 16px">
-<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A99BFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M7 15l3-3 3 2 4-5"></path></svg>
-<h3 style="margin: 0; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 21px; color: #F3F1FC">Reporting &amp; analytics</h3>
-<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #ADA9CE">Composite and matrix reports, dashboards, Accounting Center and Prism Analytics that give leadership one version of the numbers.</p>
-</div>
-<div style="padding: 32px; border-radius: 14px; background: #0D0B24; border: 1px solid #221E4C; display: flex; flex-direction: column; gap: 16px">
-<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A99BFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
-<h3 style="margin: 0; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 21px; color: #F3F1FC">Post go-live support</h3>
-<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #ADA9CE">Hypercare, managed services and release management so your tenant keeps pace with twice-yearly updates and your team stays self-sufficient.</p>
-</div>
-</div>
-</section><section id="modules" style="box-sizing: border-box; margin-top: 120px; padding: 96px 120px; background: #0B0A21; border-top: 1px solid #1C1940; border-bottom: 1px solid #1C1940; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; flex-shrink: 0">
-<div style="grid-column: span 4; display: flex; flex-direction: column; gap: 18px">
-<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #A99BFF">02 / Workday Financials</div>
-<h2 style="margin: 0; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 40px; line-height: 1.14; letter-spacing: -0.015em; color: #F3F1FC">Depth across the whole finance suite.</h2>
-<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #B3AFD3">We focus on one platform so our teams know how every module behaves, and how they work together.</p>
-</div>
-<div style="grid-column: span 8; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; font-size: 17px">
-<div style="padding: 20px 0; border-bottom: 1px solid #221E4C; display: flex; justify-content: space-between; gap: 16px"><span style="color: #ECEAF7; font-weight: 500">Core Financials &amp; General Ledger</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8F89C2">GL · FDM</span></div>
-<div style="padding: 20px 0; border-bottom: 1px solid #221E4C; display: flex; justify-content: space-between; gap: 16px"><span style="color: #ECEAF7; font-weight: 500">Procurement &amp; Supplier Accounts</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8F89C2">P2P</span></div>
-<div style="padding: 20px 0; border-bottom: 1px solid #221E4C; display: flex; justify-content: space-between; gap: 16px"><span style="color: #ECEAF7; font-weight: 500">Customer Accounts &amp; Revenue</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8F89C2">O2C</span></div>
-<div style="padding: 20px 0; border-bottom: 1px solid #221E4C; display: flex; justify-content: space-between; gap: 16px"><span style="color: #ECEAF7; font-weight: 500">Banking &amp; Settlement</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8F89C2">Cash</span></div>
-<div style="padding: 20px 0; border-bottom: 1px solid #221E4C; display: flex; justify-content: space-between; gap: 16px"><span style="color: #ECEAF7; font-weight: 500">Expenses</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8F89C2">T&amp;E</span></div>
-<div style="padding: 20px 0; border-bottom: 1px solid #221E4C; display: flex; justify-content: space-between; gap: 16px"><span style="color: #ECEAF7; font-weight: 500">Business Assets</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8F89C2">FA</span></div>
-<div style="padding: 20px 0; border-bottom: 1px solid #221E4C; display: flex; justify-content: space-between; gap: 16px"><span style="color: #ECEAF7; font-weight: 500">Projects &amp; Grants</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8F89C2">PSA</span></div>
-<div style="padding: 20px 0; border-bottom: 1px solid #221E4C; display: flex; justify-content: space-between; gap: 16px"><span style="color: #ECEAF7; font-weight: 500">Financial Consolidation &amp; Close</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8F89C2">R2R</span></div>
-<div style="padding: 20px 0; border-bottom: 1px solid #221E4C; display: flex; justify-content: space-between; gap: 16px"><span style="color: #ECEAF7; font-weight: 500">Adaptive Planning</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8F89C2">FP&amp;A</span></div>
-<div style="padding: 20px 0; border-bottom: 1px solid #221E4C; display: flex; justify-content: space-between; gap: 16px"><span style="color: #ECEAF7; font-weight: 500">Prism Analytics &amp; Reporting</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8F89C2">BI</span></div>
-</div>
+<section id="services" class="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="stack">
+        <div class="eyebrow">01 / Services</div>
+        <h2 class="h2">One partner from blueprint to steady state.</h2>
+      </div>
+      <p class="lead">Moving off a legacy ERP, adding modules or fixing a deployment that never delivered: we start from where you are.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A99BFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V6M16 20v-8M3 20h18"/><path d="M14 4h6v6"/><path d="M20 4l-8 8"/></svg>
+        <h3>New implementations</h3>
+        <p>Full-cycle Workday Financials deployments: design workshops, configuration, testing and go-live, scoped to your chart of accounts and operating model.</p>
+      </div>
+      <div class="card">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A99BFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/><circle cx="12" cy="12" r="3.5"/></svg>
+        <h3>Optimization &amp; Phase X</h3>
+        <p>Health checks, redesigns and new module rollouts for tenants already live, making full use of each Workday release.</p>
+      </div>
+      <div class="card">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A99BFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v6c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-6"/><path d="M5 11.5v6c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-6"/></svg>
+        <h3>Data migration</h3>
+        <p>Conversion strategy, cleansing and reconciled loads of balances, open items, suppliers, customers and assets, with an audit trail your controllers can sign off.</p>
+      </div>
+      <div class="card">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A99BFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h7M4 17h7"/><circle cx="14" cy="7" r="2.5"/><circle cx="14" cy="17" r="2.5"/><path d="M16.5 7H20M16.5 17H20M20 7v10"/></svg>
+        <h3>Integrations</h3>
+        <p>Banks, payroll, procurement and data platforms connected through EIB, Workday Studio, core connectors and APIs, built to be monitored and maintained.</p>
+      </div>
+      <div class="card">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A99BFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 15l3-3 3 2 4-5"/></svg>
+        <h3>Reporting &amp; analytics</h3>
+        <p>Composite and matrix reports, dashboards, Accounting Center and Prism Analytics that give leadership one version of the numbers.</p>
+      </div>
+      <div class="card">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A99BFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        <h3>Post go-live support</h3>
+        <p>Hypercare, managed services and release management so your tenant keeps pace with twice-yearly updates and your team stays self-sufficient.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- APPROACH -->
-<section id="approach" style="box-sizing: border-box; padding: 120px 120px 0; display: flex; flex-direction: column; gap: 56px; flex-shrink: 0">
-<div style="display: flex; flex-direction: column; gap: 16px; max-width: 720px">
-<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #A99BFF">03 / Approach</div>
-<h2 style="margin: 0; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 44px; line-height: 1.12; letter-spacing: -0.015em; color: #F3F1FC">A delivery path with no surprises at go-live.</h2>
-</div>
-<div style="position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px">
-<div style="position: absolute; left: 0; right: 0; top: 23px; height: 2px; background: linear-gradient(90deg, #8B5CF6, #3B7BFF)"></div>
-<div style="position: relative; display: flex; flex-direction: column; gap: 16px">
-<div style="width: 48px; height: 48px; border-radius: 50%; background: #07061A; border: 2px solid #A06BFF; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #DCD3FF">01</div>
-<h3 style="margin: 0; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 20px; color: #F3F1FC">Plan</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #ADA9CE">Scope, success measures, governance and a realistic timeline agreed with finance and IT.</p>
-</div>
-<div style="position: relative; display: flex; flex-direction: column; gap: 16px">
-<div style="width: 48px; height: 48px; border-radius: 50%; background: #07061A; border: 2px solid #8B5CF6; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #DCD3FF">02</div>
-<h3 style="margin: 0; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 20px; color: #F3F1FC">Architect</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #ADA9CE">Foundation Data Model, business processes and integration design, documented and signed off.</p>
-</div>
-<div style="position: relative; display: flex; flex-direction: column; gap: 16px">
-<div style="width: 48px; height: 48px; border-radius: 50%; background: #07061A; border: 2px solid #6D5BFA; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #DCD3FF">03</div>
-<h3 style="margin: 0; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 20px; color: #F3F1FC">Configure</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #ADA9CE">Iterative prototypes with your own data, so users see real transactions early.</p>
-</div>
-<div style="position: relative; display: flex; flex-direction: column; gap: 16px">
-<div style="width: 48px; height: 48px; border-radius: 50%; background: #07061A; border: 2px solid #5068FF; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #DCD3FF">04</div>
-<h3 style="margin: 0; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 20px; color: #F3F1FC">Test</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #ADA9CE">End-to-end, parallel and user acceptance testing against reconciled converted data.</p>
-</div>
-<div style="position: relative; display: flex; flex-direction: column; gap: 16px">
-<div style="width: 48px; height: 48px; border-radius: 50%; background: #07061A; border: 2px solid #3B7BFF; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #DCD3FF">05</div>
-<h3 style="margin: 0; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 20px; color: #F3F1FC">Deploy</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #ADA9CE">Cutover, first close on Workday and hypercare until your team runs it with confidence.</p>
-</div>
-</div>
+<section id="modules" class="modules">
+  <div class="wrap">
+    <div class="intro">
+      <div class="eyebrow">02 / Workday Financials</div>
+      <h2>Depth across the whole finance suite.</h2>
+      <p class="lead">We focus on one platform, so our teams know how every module behaves and how they fit together.</p>
+    </div>
+    <ul class="module-list">
+      <li><span class="name">Core Financials &amp; General Ledger</span><span class="code">GL · FDM</span></li>
+      <li><span class="name">Procurement &amp; Supplier Accounts</span><span class="code">P2P</span></li>
+      <li><span class="name">Customer Accounts &amp; Revenue</span><span class="code">O2C</span></li>
+      <li><span class="name">Banking &amp; Settlement</span><span class="code">Cash</span></li>
+      <li><span class="name">Expenses</span><span class="code">T&amp;E</span></li>
+      <li><span class="name">Business Assets</span><span class="code">FA</span></li>
+      <li><span class="name">Projects &amp; Grants</span><span class="code">PSA</span></li>
+      <li><span class="name">Financial Consolidation &amp; Close</span><span class="code">R2R</span></li>
+      <li><span class="name">Adaptive Planning</span><span class="code">FP&amp;A</span></li>
+      <li><span class="name">Prism Analytics &amp; Reporting</span><span class="code">BI</span></li>
+    </ul>
+  </div>
 </section>
 
-<!-- WHY EXCELA -->
-<section id="about" style="box-sizing: border-box; padding: 140px 120px 0; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; flex-shrink: 0">
-<div style="grid-column: span 5; display: flex; flex-direction: column; gap: 18px">
-<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #A99BFF">04 / Why Excela</div>
-<h2 style="margin: 0; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 44px; line-height: 1.12; letter-spacing: -0.015em; color: #F3F1FC">Specialists, not generalists.</h2>
-<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #B3AFD3">We only do Workday Financials. That focus shows up in cleaner designs, fewer change requests and teams who understand the accounting behind every configuration choice.</p>
-<a href="#contact" style="margin-top: 8px; font-weight: 600; font-size: 16px">Meet the team →</a>
-</div>
-<div style="grid-column: span 7; display: flex; flex-direction: column; gap: 0">
-<div style="padding: 28px 0; border-top: 1px solid #221E4C; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px">
-<div style="grid-column: span 4; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 20px; color: #F3F1FC">Finance-first consultants</div>
-<p style="grid-column: span 8; margin: 0; font-size: 16px; line-height: 1.6; color: #ADA9CE">Our consultants speak the language of controllers and CFOs, so design sessions focus on how you close, report and audit, not on system screens.</p>
-</div>
-<div style="padding: 28px 0; border-top: 1px solid #221E4C; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px">
-<div style="grid-column: span 4; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 20px; color: #F3F1FC">Senior-led delivery</div>
-<p style="grid-column: span 8; margin: 0; font-size: 16px; line-height: 1.6; color: #ADA9CE">The people who scope your project are the people who build it. No hand-off to a junior bench once the contract is signed.</p>
-</div>
-<div style="padding: 28px 0; border-top: 1px solid #221E4C; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px">
-<div style="grid-column: span 4; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 20px; color: #F3F1FC">Built to hand over</div>
-<p style="grid-column: span 8; margin: 0; font-size: 16px; line-height: 1.6; color: #ADA9CE">Configuration workbooks, runbooks and hands-on training so your team owns the tenant after go-live instead of depending on us.</p>
-</div>
-<div style="padding: 28px 0; border-top: 1px solid #221E4C; border-bottom: 1px solid #221E4C; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px">
-<div style="grid-column: span 4; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 20px; color: #F3F1FC">Fixed, transparent scope</div>
-<p style="grid-column: span 8; margin: 0; font-size: 16px; line-height: 1.6; color: #ADA9CE">Clear deliverables, milestones and a change process agreed up front, so budgets hold and nobody is surprised.</p>
-</div>
-</div>
+<section id="approach" class="approach">
+  <div class="wrap">
+    <div class="stack">
+      <div class="eyebrow">03 / Approach</div>
+      <h2 class="h2">A delivery path with no surprises at go-live.</h2>
+    </div>
+    <ol class="steps">
+      <li>
+        <div class="step-num" style="border-color:#A06BFF">01</div>
+        <h3>Plan</h3>
+        <p>Scope, success measures, governance and a realistic timeline agreed with finance and IT.</p>
+      </li>
+      <li>
+        <div class="step-num" style="border-color:#8B5CF6">02</div>
+        <h3>Architect</h3>
+        <p>Foundation Data Model, business processes and integration design, documented and signed off.</p>
+      </li>
+      <li>
+        <div class="step-num" style="border-color:#6D5BFA">03</div>
+        <h3>Configure</h3>
+        <p>Iterative prototypes with your own data, so users see real transactions early.</p>
+      </li>
+      <li>
+        <div class="step-num" style="border-color:#5068FF">04</div>
+        <h3>Test</h3>
+        <p>End-to-end, parallel and user acceptance testing against reconciled converted data.</p>
+      </li>
+      <li>
+        <div class="step-num" style="border-color:#3B7BFF">05</div>
+        <h3>Deploy</h3>
+        <p>Cutover, first close on Workday and hypercare until your team runs it with confidence.</p>
+      </li>
+    </ol>
+  </div>
 </section>
 
-<!-- INDUSTRIES -->
-<section id="industries" style="box-sizing: border-box; padding: 140px 120px 0; display: flex; flex-direction: column; gap: 48px; flex-shrink: 0">
-<div style="display: flex; flex-direction: column; gap: 16px; max-width: 720px">
-<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #A99BFF">05 / Industries</div>
-<h2 style="margin: 0; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 44px; line-height: 1.12; letter-spacing: -0.015em; color: #F3F1FC">Configured for how your industry runs.</h2>
-</div>
-<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px">
-<div style="padding: 28px 32px; border-radius: 14px; border: 1px solid #221E4C; display: flex; flex-direction: column; gap: 10px"><div style="font-family: 'Sora', sans-serif; font-weight: 600; font-size: 20px; color: #F3F1FC">Financial services</div><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #ADA9CE">Multi-entity structures, intercompany and regulatory reporting.</p></div>
-<div style="padding: 28px 32px; border-radius: 14px; border: 1px solid #221E4C; display: flex; flex-direction: column; gap: 10px"><div style="font-family: 'Sora', sans-serif; font-weight: 600; font-size: 20px; color: #F3F1FC">Professional services</div><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #ADA9CE">Project billing, revenue recognition and utilization insight.</p></div>
-<div style="padding: 28px 32px; border-radius: 14px; border: 1px solid #221E4C; display: flex; flex-direction: column; gap: 10px"><div style="font-family: 'Sora', sans-serif; font-weight: 600; font-size: 20px; color: #F3F1FC">Technology</div><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #ADA9CE">Subscription revenue, rapid entity growth and IPO-ready controls.</p></div>
-<div style="padding: 28px 32px; border-radius: 14px; border: 1px solid #221E4C; display: flex; flex-direction: column; gap: 10px"><div style="font-family: 'Sora', sans-serif; font-weight: 600; font-size: 20px; color: #F3F1FC">Healthcare</div><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #ADA9CE">Supply chain spend control and cost-center accountability.</p></div>
-<div style="padding: 28px 32px; border-radius: 14px; border: 1px solid #221E4C; display: flex; flex-direction: column; gap: 10px"><div style="font-family: 'Sora', sans-serif; font-weight: 600; font-size: 20px; color: #F3F1FC">Education &amp; nonprofit</div><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #ADA9CE">Grants, gifts, fund accounting and board-ready reporting.</p></div>
-<div style="padding: 28px 32px; border-radius: 14px; border: 1px solid #221E4C; display: flex; flex-direction: column; gap: 10px"><div style="font-family: 'Sora', sans-serif; font-weight: 600; font-size: 20px; color: #F3F1FC">Retail &amp; hospitality</div><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #ADA9CE">High-volume transactions, store-level P&amp;L and bank reconciliation.</p></div>
-</div>
+<section id="about" class="about">
+  <div class="wrap">
+    <div class="intro">
+      <div class="eyebrow">04 / Why Excela</div>
+      <h2 class="h2">Workday Financials specialists.</h2>
+      <p class="lead">Workday Financials is all we do. That focus shows up in cleaner designs, fewer change requests and teams who understand the accounting behind every configuration choice.</p>
+      <a href="#contact">Talk to our team →</a>
+    </div>
+    <div class="reasons">
+      <div class="reason">
+        <h3>Finance-first consultants</h3>
+        <p>Our consultants speak the language of controllers and CFOs, so design sessions focus on how you close, report and audit.</p>
+      </div>
+      <div class="reason">
+        <h3>Senior-led delivery</h3>
+        <p>The people who scope your project are the people who build it, from the first workshop to go-live.</p>
+      </div>
+      <div class="reason">
+        <h3>Built to hand over</h3>
+        <p>Configuration workbooks, runbooks and hands-on training, so your team owns the tenant after go-live.</p>
+      </div>
+      <div class="reason">
+        <h3>Fixed, transparent scope</h3>
+        <p>Clear deliverables, milestones and a change process agreed up front, so budgets hold.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- CASE STUDIES -->
-<section style="box-sizing: border-box; padding: 140px 120px 0; display: flex; flex-direction: column; gap: 48px; flex-shrink: 0">
-<div style="display: flex; justify-content: space-between; align-items: flex-end">
-<div style="display: flex; flex-direction: column; gap: 16px">
-<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #A99BFF">06 / Results</div>
-<h2 style="margin: 0; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 44px; line-height: 1.12; letter-spacing: -0.015em; color: #F3F1FC">Outcomes our clients report.</h2>
-</div>
-<a href="#contact" style="font-weight: 600; font-size: 16px">All case studies →</a>
-</div>
-<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px">
-<div style="padding: 40px; border-radius: 16px; background: #0D0B24; border: 1px solid #221E4C; display: flex; flex-direction: column; gap: 20px">
-<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8F89C2">[Industry] · [Modules delivered]</div>
-<div style="font-family: 'Sora', sans-serif; font-weight: 600; font-size: 56px; letter-spacing: -0.02em; color: #F3F1FC">[X] days</div>
-<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #B3AFD3">[Result headline, e.g. month-end close shortened after moving from legacy ERP to Workday Financials.]</p>
-<div style="padding-top: 20px; border-top: 1px solid #221E4C; font-size: 15px; color: #ADA9CE">[Client name] — [Name, Title]</div>
-</div>
-<div style="padding: 40px; border-radius: 16px; background: #0D0B24; border: 1px solid #221E4C; display: flex; flex-direction: column; gap: 20px">
-<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8F89C2">[Industry] · [Modules delivered]</div>
-<div style="font-family: 'Sora', sans-serif; font-weight: 600; font-size: 56px; letter-spacing: -0.02em; color: #F3F1FC">[X] entities</div>
-<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #B3AFD3">[Result headline, e.g. global consolidation delivered on one tenant with automated intercompany.]</p>
-<div style="padding-top: 20px; border-top: 1px solid #221E4C; font-size: 15px; color: #ADA9CE">[Client name] — [Name, Title]</div>
-</div>
-</div>
+<section id="industries" class="industries">
+  <div class="wrap">
+    <div class="stack">
+      <div class="eyebrow">05 / Industries</div>
+      <h2 class="h2">Configured for how your industry runs.</h2>
+    </div>
+    <div class="card-grid">
+      <div class="industry"><h3>Financial services</h3><p>Multi-entity structures, intercompany and regulatory reporting.</p></div>
+      <div class="industry"><h3>Professional services</h3><p>Project billing, revenue recognition and utilization insight.</p></div>
+      <div class="industry"><h3>Technology</h3><p>Subscription revenue, rapid entity growth and IPO-ready controls.</p></div>
+      <div class="industry"><h3>Healthcare</h3><p>Supply chain spend control and cost-center accountability.</p></div>
+      <div class="industry"><h3>Education &amp; nonprofit</h3><p>Grants, gifts, fund accounting and board-ready reporting.</p></div>
+      <div class="industry"><h3>Retail &amp; hospitality</h3><p>High-volume transactions, store-level P&amp;L and bank reconciliation.</p></div>
+    </div>
+  </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact" style="box-sizing: border-box; margin: 140px 120px 0; padding: 64px; border-radius: 20px; background: #0E0C2A; border: 1px solid #2A2560; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px; flex-shrink: 0">
-<div style="display: flex; flex-direction: column; gap: 20px">
-<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #A99BFF">Start a conversation</div>
-<h2 style="margin: 0; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 44px; line-height: 1.12; letter-spacing: -0.015em; color: #F3F1FC">Planning a move to Workday Financials?</h2>
-<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #B3AFD3">Tell us where you are today. A senior consultant will reply within one business day with next steps, whether that is a scoping call, a readiness assessment or a tenant health check.</p>
-<div style="display: flex; flex-direction: column; gap: 10px; margin-top: 12px; font-size: 16px; color: #DAD7F0">
-<a href="mailto:[hello@excela.com]" style="text-decoration: none">[hello@excela.com]</a>
-<span>[Phone number]</span>
-<span style="color: #ADA9CE">[Office address]</span>
+<div class="contact-outer">
+  <div class="wrap">
+    <section id="contact" class="contact">
+      <div class="intro">
+        <div class="eyebrow">Start a conversation</div>
+        <h2 class="h2">Planning a move to Workday Financials?</h2>
+        <p class="lead">Tell us where you are today. A senior consultant will reply within one business day with next steps: a scoping call, a readiness assessment or a tenant health check.</p>
+      </div>
+      <!-- TODO: point action at your form handler (e.g. Formspree) or a mailto: address -->
+      <form class="contact-form" action="#" method="post">
+        <div class="field-row">
+          <div class="field"><label for="f-name">Full name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="f-email">Work email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="f-company">Company</label><input id="f-company" name="company" type="text" autocomplete="organization"></div>
+          <div class="field"><label for="f-stage">Where are you today?</label>
+            <select id="f-stage" name="stage">
+              <option>Evaluating Workday</option>
+              <option>Workday selected, planning</option>
+              <option>Mid-implementation</option>
+              <option>Live, need optimization</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label for="f-msg">What are you trying to achieve?</label><textarea id="f-msg" name="message" rows="5"></textarea></div>
+        <button type="submit" class="btn btn-primary">Request a consultation</button>
+      </form>
+    </section>
+  </div>
 </div>
-</div>
-<div style="display: flex; flex-direction: column; gap: 18px">
-<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
-<div style="display: flex; flex-direction: column; gap: 8px"><label for="f-name" style="font-size: 14px; color: #C9C5E6">Full name</label><input id="f-name" type="text" style="height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 8px; background: #07061A; border: 1px solid #332E66; color: #ECEAF7; font-size: 16px; font-family: inherit"></div>
-<div style="display: flex; flex-direction: column; gap: 8px"><label for="f-email" style="font-size: 14px; color: #C9C5E6">Work email</label><input id="f-email" type="email" style="height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 8px; background: #07061A; border: 1px solid #332E66; color: #ECEAF7; font-size: 16px; font-family: inherit"></div>
-</div>
-<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
-<div style="display: flex; flex-direction: column; gap: 8px"><label for="f-company" style="font-size: 14px; color: #C9C5E6">Company</label><input id="f-company" type="text" style="height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 8px; background: #07061A; border: 1px solid #332E66; color: #ECEAF7; font-size: 16px; font-family: inherit"></div>
-<div style="display: flex; flex-direction: column; gap: 8px"><label for="f-stage" style="font-size: 14px; color: #C9C5E6">Where are you today?</label><select id="f-stage" style="height: 48px; box-sizing: border-box; padding: 0 12px; border-radius: 8px; background: #07061A; border: 1px solid #332E66; color: #ECEAF7; font-size: 16px; font-family: inherit"><option>Evaluating Workday</option><option>Workday selected, planning</option><option>Mid-implementation</option><option>Live, need optimization</option></select></div>
-</div>
-<div style="display: flex; flex-direction: column; gap: 8px"><label for="f-msg" style="font-size: 14px; color: #C9C5E6">What are you trying to achieve?</label><textarea id="f-msg" rows="5" style="box-sizing: border-box; padding: 12px 14px; border-radius: 8px; background: #07061A; border: 1px solid #332E66; color: #ECEAF7; font-size: 16px; font-family: inherit; resize: vertical"></textarea></div>
-<button type="button" style="height: 52px; border: 0; border-radius: 8px; background: {{accent}}; color: #FFFFFF; font-weight: 600; font-size: 16px; font-family: inherit; cursor: pointer">Request a consultation</button>
-</div>
-</section>
 
-<!-- FOOTER -->
-<footer style="flex-grow: 1; box-sizing: border-box; margin-top: 120px; padding: 64px 120px 48px; border-top: 1px solid #1C1940; display: flex; flex-direction: column; gap: 48px">
-<div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px">
-<div style="grid-column: span 5; display: flex; flex-direction: column; gap: 18px">
-<img src="./assets/f334857f25ae0449d4b251165bbc5e58.png" alt="Excela" style="height: 36px; width: auto; align-self: flex-start">
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #ADA9CE; max-width: 360px">Workday Financials implementation, optimization and support for finance teams that expect more from their ERP.</p>
-</div>
-<div style="grid-column: span 2; display: flex; flex-direction: column; gap: 12px; font-size: 15px"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8F89C2; margin-bottom: 4px">Services</div><a href="#services" style="color: #C9C5E6; text-decoration: none">Implementation</a><a href="#services" style="color: #C9C5E6; text-decoration: none">Optimization</a><a href="#services" style="color: #C9C5E6; text-decoration: none">Data migration</a><a href="#services" style="color: #C9C5E6; text-decoration: none">Support</a></div>
-<div style="grid-column: span 2; display: flex; flex-direction: column; gap: 12px; font-size: 15px"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8F89C2; margin-bottom: 4px">Company</div><a href="#about" style="color: #C9C5E6; text-decoration: none">About</a><a href="#approach" style="color: #C9C5E6; text-decoration: none">Approach</a><a href="#contact" style="color: #C9C5E6; text-decoration: none">Careers</a><a href="#contact" style="color: #C9C5E6; text-decoration: none">Contact</a></div>
-<div style="grid-column: span 3; display: flex; flex-direction: column; gap: 12px; font-size: 15px"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8F89C2; margin-bottom: 4px">Connect</div><a href="#contact" style="color: #C9C5E6; text-decoration: none">LinkedIn</a><a href="mailto:[hello@excela.com]" style="color: #C9C5E6; text-decoration: none">[hello@excela.com]</a></div>
-</div>
-<div style="padding-top: 24px; border-top: 1px solid #1C1940; display: flex; justify-content: space-between; font-size: 13px; color: #8F89C2">
-<span>© 2026 Excela Financial Services. All rights reserved.</span>
-<span>Workday is a trademark of Workday, Inc. Excela is an independent consultancy.</span>
-</div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="./assets/f334857f25ae0449d4b251165bbc5e58.png" alt="Excela" width="189" height="36">
+        <p>Workday Financials implementation, optimization and support for finance teams that expect more from their ERP.</p>
+      </div>
+      <div class="footer-col"><div class="label">Services</div><a href="#services">Implementation</a><a href="#services">Optimization</a><a href="#services">Data migration</a><a href="#services">Support</a></div>
+      <div class="footer-col"><div class="label">Company</div><a href="#about">About</a><a href="#approach">Approach</a><a href="#contact">Contact</a></div>
+      <div class="footer-col"><div class="label">Connect</div><a href="#contact">Get in touch</a></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Excela. All rights reserved.</span>
+      <span>Workday is a trademark of Workday, Inc. Excela is an independent consultancy.</span>
+    </div>
+  </div>
 </footer>
 
-</div>
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#5B3DF5","options":["#5B3DF5","#3B5BFF","#7A3FF0"]},"$preview":{"width":1440,"height":6100}}'>
-class Component extends DCLogic {
-  renderVals() {
-    return { accent: this.props.accent ?? '#5B3DF5' };
-  }
-}
-</script>
 </body>
 </html>
